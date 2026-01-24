@@ -33,8 +33,12 @@ jobs:
       - name: Commit Genesis
         run: |
           git add .
-          git commit -m "🌱 Genesis: Plant the first quine seed"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🌱 Genesis: Plant the first quine seed"
+            git push
+          else
+            echo "No changes to commit"
+          fi
       
       - name: Display Genesis Info
         run: |

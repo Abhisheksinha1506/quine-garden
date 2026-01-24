@@ -84,8 +84,12 @@ jobs:
           GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "unknown")
           
           git add -A
-          git commit -m "🧬 Evolution: Generation ${GENERATION}"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🧬 Evolution: Generation ${GENERATION}"
+            git push
+          else
+            echo "No changes to commit"
+          fi
       
       - name: Update README Stats
         run: |
