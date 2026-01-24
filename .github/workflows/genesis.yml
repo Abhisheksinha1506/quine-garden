@@ -1,0 +1,42 @@
+name: Genesis - Plant the Seed
+
+on:
+  workflow_dispatch:
+
+jobs:
+  genesis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Configure Git
+        run: |
+          git config user.name "Quine Gardener"
+          git config user.email "quine@garden.bot"
+      
+      - name: Create Garden Structure
+        run: |
+          mkdir -p generations
+          
+          # README and EVOLUTION are already created by the setup script, 
+          # but we ensure they exist or are initialized here if needed.
+      
+      - name: Commit Genesis
+        run: |
+          git add .
+          git commit -m "🌱 Genesis: Plant the first quine seed"
+          git push
+      
+      - name: Display Genesis Info
+        run: |
+          echo "🎉 Quine Garden initialized!"
+          echo "The first evolution will occur at the next scheduled time."

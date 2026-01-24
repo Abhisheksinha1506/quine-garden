@@ -1,0 +1,97 @@
+name: Daily Evolution
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  
+  workflow_dispatch:  # Manual trigger for testing
+
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Configure Git
+        run: |
+          git config user.name "Quine Gardener"
+          git config user.email "quine@garden.bot"
+      
+      - name: Display Current Generation
+        run: |
+          echo "🧬 Current Quine State:"
+          echo "===================="
+          head -5 quine.py
+          echo ""
+      
+      - name: Log Current Generation
+        run: |
+          python3 logger.py
+      
+      - name: Evolve Quine
+        run: |
+          echo "🔄 Running quine to produce next generation..."
+          
+          # Run the quine and capture output
+          python3 quine.py > quine_next.py
+          
+          # Replace old with new
+          mv quine_next.py quine.py
+          
+          echo "✅ Evolution complete"
+      
+      - name: Display New Generation
+        run: |
+          echo ""
+          echo "🌱 New Quine State:"
+          echo "===================="
+          head -5 quine.py
+          echo ""
+      
+      - name: Verify Quine Still Works
+        run: |
+          echo "🧪 Testing self-replication..."
+          
+          # Test that the new quine can still replicate
+          python3 quine.py > test_output.py
+          
+          # Basic validation
+          if grep -q "template =" test_output.py; then
+            echo "✅ Quine integrity verified"
+            rm test_output.py
+          else
+            echo "❌ Quine broken! Reverting..."
+            git checkout quine.py
+            exit 1
+          fi
+      
+      - name: Commit Evolution
+        run: |
+          # Get generation info
+          GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "unknown")
+          
+          git add -A
+          git commit -m "🧬 Evolution: Generation ${GENERATION}"
+          git push
+      
+      - name: Update README Stats
+        run: |
+          GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "0")
+          GENERATIONS_COUNT=$(ls generations/*.py 2>/dev/null | wc -l)
+          
+          echo "📊 Statistics:"
+          echo "- Current Generation: ${GENERATION}"
+          echo "- Snapshots Saved: ${GENERATIONS_COUNT}"
