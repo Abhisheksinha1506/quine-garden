@@ -1,6 +1,6 @@
 # 🌱 Quine Garden
 
-A self-replicating program that evolves daily through deterministic mutations.
+A self-replicating program that evolves every 15 minutes through deterministic mutations.
 
 ## What is this?
 
