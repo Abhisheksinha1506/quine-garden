@@ -151,3 +151,43 @@ Lineage: 🌷🌷
 ```
 
 ---
+
+## Generation 2
+
+- **Date:** 2026-01-25 13:56:52 UTC
+- **File:** `generations/gen_0002.py`
+- **Technical Status:** `# Drift: Minor adaptation`
+- **Nature's Note:** *A new leaf has sprouted, making the garden a bit more resilient.*
+- **Stats:** 44 lines, 3120 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 2
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷
+# Drift: Minor adaptation
+# Nature's Note: A new leaf has sprouted, mak...
+```
+
+---
+
+## Generation 3
+
+- **Date:** 2026-01-25 13:56:52 UTC
+- **File:** `generations/gen_0003.py`
+- **Technical Status:** `# Drift: Minor adaptation`
+- **Nature's Note:** *A new leaf has sprouted, making the garden a bit more resilient.*
+- **Stats:** 44 lines, 3122 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 3
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀
+# Drift: Minor adaptation
+# Nature's Note: A new leaf has sprouted, ma...
+```
+
+---
