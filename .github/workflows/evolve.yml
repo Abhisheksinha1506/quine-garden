@@ -2,7 +2,7 @@ name: Daily Evolution
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # Every 15 minutes
+    - cron: '0 * * * *'  # Every hour (more reliable than 15 mins)
   
   workflow_dispatch:  # Manual trigger for testing
 
@@ -12,6 +12,7 @@ jobs:
     
     permissions:
       contents: write
+      issues: write
     
     steps:
       - name: Checkout repository
@@ -91,6 +92,24 @@ jobs:
             echo "No changes to commit"
           fi
       
+      - name: Create Evolution Report Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
+          DRIFT=$(grep "# Drift:" quine.py | head -n 1 || echo "No drift recorded")
+          LINEAGE=$(grep "Lineage:" quine.py | head -n 1 || echo "Lineage unknown")
+          
+          gh issue create --title "🧬 Evolution Report: Generation ${GENERATION}" --body "## Evolution Detected!
+          
+          The garden has mutated.
+          
+          - **Generation:** ${GENERATION}
+          - **Observations:** ${DRIFT}
+          - **Lineage:** ${LINEAGE}
+          
+          *This issue was automatically created by the Quine Garden to record its growth.*"
+          
       - name: Update README Stats
         run: |
           GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "0")

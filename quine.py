@@ -1,9 +1,9 @@
-# Drift: Mutation success
 #!/usr/bin/env python3
 """
-Quine Garden - Generation 1
+Quine Garden - Generation 2
 Self-replicating code that evolves based on temporal entropy.
-Lineage: 🌷
+Lineage: 🌷🌷
+# Drift: Stable replication
 """
 
 import hashlib
@@ -11,23 +11,45 @@ import random
 from datetime import datetime
 
 # ASCII art mutations for visual evolution
+# This list can be expanded to create more diversity in the lineage
 MUTATIONS = ['🌱', '🌿', '🍀', '🌾', '🌳', '🌲', '🌴', '🌵', '🌷', '🌸', '🌹', '🥀', '🌺', '🌻', '🌼', '🌽', '🍄', '🌰', '🎋', '🎍']
 
-template = '#!/usr/bin/env python3\n"""\nQuine Garden - Generation %d\nSelf-replicating code that evolves based on temporal entropy.\nLineage: %s\n"""\n\nimport hashlib\nimport random\nfrom datetime import datetime\n\n# ASCII art mutations for visual evolution\nMUTATIONS = %r\n\ntemplate = %r\n\n# Temporal DNA\ndate_str = datetime.now().strftime("%%Y-%%m-%%d %%H:%%M")\ndate_hash = hashlib.sha256(date_str.encode()).hexdigest()\nmutation_index = int(date_hash[-2:], 16) %% len(MUTATIONS)\n\n# Evolution tracking\ngeneration = %d + 1\nlineage = "%s" + MUTATIONS[mutation_index]\n\n# Deterministic mutation seed\nrandom.seed(date_hash)\n\n# Genetic drift: small code variations\ndrift = random.choice([\n    "# Drift: Stable replication",\n    "# Drift: Minor adaptation", \n    "# Drift: Environmental pressure",\n    "# Drift: Mutation success"\n])\n\nprint(f"{{drift}}")\nprint(template %% (generation, lineage, MUTATIONS, template, generation, lineage))\n'
+# The Template (DNA): This string contains the blueprint for the entire program.
+# It uses string formatting (%) to inject its own content back into itself.
+template = '''#!/usr/bin/env python3
+"""
+Quine Garden - Generation %%d
+Self-replicating code that evolves based on temporal entropy.
+Lineage: %%s
+%%s
+"""
 
-# Temporal DNA
-date_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+import hashlib
+import random
+from datetime import datetime
+
+# ASCII art mutations for visual evolution
+# This list can be expanded to create more diversity in the lineage
+MUTATIONS = %%r
+
+# The Template (DNA): This string contains the blueprint for the entire program.
+template = %%r
+
+# --- EVOLUTION LOGIC ---
+
+# 1. Temporal DNA: Get current time to ensure deterministic yet changing mutations
+date_str = datetime.now().strftime("%%%%Y-%%%%m-%%%%d %%%%H:%%%%M")
 date_hash = hashlib.sha256(date_str.encode()).hexdigest()
-mutation_index = int(date_hash[-2:], 16) % len(MUTATIONS)
+mutation_index = int(date_hash[-2:], 16) %%%% len(MUTATIONS)
 
-# Evolution tracking
-generation = 1 + 1
-lineage = "🌷" + MUTATIONS[mutation_index]
+# 2. Progressing the Lineage
+generation = %%d + 1
+lineage = "%%s" + MUTATIONS[mutation_index]
 
-# Deterministic mutation seed
+# 3. Deterministic Randomness: Seed the random generator with the time hash
 random.seed(date_hash)
 
-# Genetic drift: small code variations
+# 4. Genetic Drift: Randomly select a descriptive comment for this generation
 drift = random.choice([
     "# Drift: Stable replication",
     "# Drift: Minor adaptation", 
@@ -35,6 +57,32 @@ drift = random.choice([
     "# Drift: Mutation success"
 ])
 
-print(f"{{drift}}")
-print(template % (generation, lineage, MUTATIONS, template, generation, lineage))
+# 5. The REPRODUCTION: Print the template with all evolved values
+# This is the "Magic Moment" where the program prints its own source code.
+print(template %%%% (generation, lineage, drift, MUTATIONS, template, generation, lineage))
+'''
 
+# --- EVOLUTION LOGIC ---
+
+# 1. Temporal DNA: Get current time to ensure deterministic yet changing mutations
+date_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+date_hash = hashlib.sha256(date_str.encode()).hexdigest()
+mutation_index = int(date_hash[-2:], 16) % len(MUTATIONS)
+
+# 2. Progressing the Lineage
+generation = 2
+lineage = "🌷🌷"
+
+# 3. Deterministic Randomness: Seed the random generator with the time hash
+random.seed(date_hash)
+
+# 4. Genetic Drift: Randomly select a descriptive comment for this generation
+drift = random.choice([
+    "# Drift: Stable replication",
+    "# Drift: Minor adaptation",
+    "# Drift: Environmental pressure", 
+    "# Drift: Mutation success"
+])
+
+# 5. The REPRODUCTION: Print the template with all evolved values
+print(template % (generation, lineage, drift, MUTATIONS, template, generation, lineage))
