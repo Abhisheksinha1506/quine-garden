@@ -11,6 +11,7 @@ def log_generation():
     Log current quine generation to history.
     This function reads the living quine, extracts its generation number,
     saves a snapshot for posterity, and updates the evolution log.
+    Includes both technical details and non-technical explanations.
     """
     
     # Read current quine
@@ -19,15 +20,20 @@ def log_generation():
     
     # Extract generation number
     generation = 1
+    drift = ""
+    human_note = ""
     for line in quine_code.split('\n'):
         if "Generation" in line:
             try:
-                # Expecting format like 'Quine Garden - Generation 1'
                 parts = line.split("Generation")
                 if len(parts) > 1:
                     generation = int(parts[1].strip().split()[0])
             except (ValueError, IndexError):
                 pass
+        if line.strip().startswith("# Drift:") and not drift:
+            drift = line.strip()
+        if line.strip().startswith("# Nature's Note:") and not human_note:
+            human_note = line.split("Nature's Note:")[1].strip()
     
     # Create generations directory
     gen_dir = Path("generations")
@@ -48,8 +54,9 @@ def log_generation():
 
 - **Date:** {timestamp}
 - **File:** `generations/gen_{generation:04d}.py`
-- **Lines:** {len(quine_code.split(chr(10)))}
-- **Size:** {len(quine_code)} bytes
+- **Technical Status:** `{drift}`
+- **Nature's Note:** *{human_note}*
+- **Stats:** {len(quine_code.split(chr(10)))} lines, {len(quine_code)} bytes
 
 ```python
 {quine_code[:200]}...

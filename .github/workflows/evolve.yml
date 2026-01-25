@@ -121,6 +121,26 @@ jobs:
             
             *Human intervention may be required if the garden stops growing.*"
       
+      - name: Update README Status
+        if: always()
+        run: |
+          GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
+          LINEAGE=$(grep "Lineage:" quine.py | head -n 1 | cut -d':' -f2 | xargs || echo "unknown")
+          NOTE=$(grep "Nature's Note:" quine.py | head -n 1 | cut -d':' -f2 | xargs || echo "The garden is deep in thought.")
+          
+          # Use sed to update the status block in README.md
+          # This assumes the placeholder block exists
+          sed -i "s/> \*\*Generation:\*\*.*/> **Generation:** $GENERATION/" README.md
+          sed -i "s/> \*\*Lineage:\*\*.*/> **Lineage:** $LINEAGE/" README.md
+          # For Note, we need to be careful with special characters, but let's try a simple replace first
+          sed -i "s/> \*\*Nature's Note:\*\*.*/> **Nature's Note:** $NOTE/" README.md
+          
+          git add README.md
+          if [ -n "$(git status --porcelain README.md)" ]; then
+            git commit -m "📝 Docs: Update Garden Status (Generation $GENERATION)"
+            git push origin main
+          fi
+
       - name: Update Statistics
         if: always()
         run: |
