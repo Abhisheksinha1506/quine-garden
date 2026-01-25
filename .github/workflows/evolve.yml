@@ -43,78 +43,86 @@ jobs:
           python3 logger.py
       
       - name: Evolve Quine
+        id: evolve_step
         run: |
           echo "🔄 Running quine to produce next generation..."
           
-          # Run the quine and capture output
+          # 1. Create a unique branch for this mutation
+          BRANCH_NAME="evolution/gen-$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "next")-$(date +%s)"
+          git checkout -b "$BRANCH_NAME"
+          
+          # 2. Run the quine and capture output
           python3 quine.py > quine_next.py
           
-          # Replace old with new
+          # 3. Replace old with new
           mv quine_next.py quine.py
           
+          # 4. Run logger to generate snapshots and log entries
+          python3 logger.py
+          
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
           echo "✅ Evolution complete"
       
-      - name: Display New Generation
-        run: |
-          echo ""
-          echo "🌱 New Quine State:"
-          echo "===================="
-          head -5 quine.py
-          echo ""
-      
-      - name: Verify Quine Still Works
+      - name: Verify Quine Integrity
+        id: verify_step
         run: |
           echo "🧪 Testing self-replication..."
-          
-          # Test that the new quine can still replicate
           python3 quine.py > test_output.py
           
-          # Basic validation
           if grep -q "template =" test_output.py; then
             echo "✅ Quine integrity verified"
             rm test_output.py
           else
-            echo "❌ Quine broken! Reverting..."
-            git checkout quine.py
+            echo "❌ Quine broken!"
             exit 1
           fi
       
-      - name: Commit Evolution
-        run: |
-          # Get generation info
-          GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
-          
-          git add -A
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "🧬 Evolution: Generation ${GENERATION}"
-            git push
-          else
-            echo "No changes to commit"
-          fi
-      
-      - name: Create Evolution Report Issue
+      - name: Propose & Merge Mutation (PR)
+        if: success()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
           DRIFT=$(grep "# Drift:" quine.py | head -n 1 || echo "No drift recorded")
-          LINEAGE=$(grep "Lineage:" quine.py | head -n 1 || echo "Lineage unknown")
+          BRANCH_NAME="${{ steps.evolve_step.outputs.branch_name }}"
           
-          gh issue create --title "🧬 Evolution Report: Generation ${GENERATION}" --body "## Evolution Detected!
+          git add -A
+          git commit -m "🧬 Evolution: Generation ${GENERATION}"
+          git push origin "$BRANCH_NAME"
           
-          The garden has mutated.
+          # Create and Merge PR
+          PR_URL=$(gh pr create --title "🧬 Mutation Proposal: Generation ${GENERATION}" \
+            --body "## Genetic Drift Detected
+            
+            - **Generation:** ${GENERATION}
+            - **Observations:** ${DRIFT}
+            
+            *The garden is proposing this change to its own genome.*" \
+            --base main --head "$BRANCH_NAME")
           
-          - **Generation:** ${GENERATION}
-          - **Observations:** ${DRIFT}
-          - **Lineage:** ${LINEAGE}
-          
-          *This issue was automatically created by the Quine Garden to record its growth.*"
-          
-      - name: Update README Stats
+          echo "PR created: $PR_URL"
+          gh pr merge "$PR_URL" --merge --delete-branch
+      
+      - name: Report Genetic Collapse (Issue)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "0")
-          GENERATIONS_COUNT=$(ls generations/*.py 2>/dev/null | wc -l)
+          GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
           
-          echo "📊 Statistics:"
-          echo "- Current Generation: ${GENERATION}"
-          echo "- Snapshots Saved: ${GENERATIONS_COUNT}"
+          gh issue create --title "🚨 GENETIC COLLAPSE: Generation ${GENERATION}" \
+            --body "## Critical Error
+            
+            The latest mutation resulted in a non-replicating program. 
+            The system has blocked the merge to protect the lineage.
+            
+            **Generation attempted:** ${GENERATION}
+            **Status:** Reverted to last stable state.
+            
+            *Human intervention may be required if the garden stops growing.*"
+      
+      - name: Update Statistics
+        if: always()
+        run: |
+          python3 visualize.py
+          python3 lineage.py

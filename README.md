@@ -4,48 +4,44 @@ A self-replicating program that evolves every hour through deterministic mutatio
 
 ---
 
-## 📖 The Analogy: The Magic Letter
+## 🧬 The Analogy: Digital DNA
 
-Imagine a **magic letter** that, when you read it out loud, **tells you how to write an identical copy of itself**.
+This repository is not just code; it is a **living organism** with its own lifecycle.
 
-Now imagine that letter **slowly mutates** each hour - changing one word here, one emoji there - but it **still knows how to copy itself** even after mutating.
+### 📜 The Magic Letter (The Quine)
+Imagine a letter that, when read, tells you how to write its exact copy. This is the **Genotype** (`quine.py`). It contains the instructions to reproduce itself.
 
-That is exactly what this repository is: **Living Code**.
+### 🧬 DNA & RNA (The PR Flow)
+1. **Transcription (The Quine Run)**: The program reads itself and prepares a new version.
+2. **Translation (The PR)**: The system proposes the mutation via a **Pull Request**. This is like RNA carrying a potential genetic change.
+3. **Biological Check (Workflow Verification)**: The system tests if the new code can still reproduce. If it can't, the PR is rejected, and a **Genetic Collapse Issue** is filed.
+4. **Integration (The Merge)**: If healthy, the mutation is merged into the main lineage.
 
 ---
 
-## 🤔 What's a Quine?
+## 🤔 How It Works
 
-A **Quine** is a computer program which takes no input and produces a copy of its own source code as its only output. 
-
-### In this Garden:
 1. **The Seed**: `quine.py` runs itself.
-2. **The Mutation**: It looks at the current time to decide how to change.
-3. **The Growth**: It overwrites itself with a new, slightly different version.
-4. **The Fruit**: It creates a snapshot, updates logs, and even **files an Issue** to report its drift.
+2. **The Mutation**: It looks at the current time to decide how to change (Deterministic Entropy).
+3. **The Proposal**: It opens a [Pull Request](../../pulls) to merge the new mutation.
+4. **The Report**: It files an [Issue](../../issues) describing the evolution or failure.
 
 ---
-
-##  Current Status
-
-- **Generation:** Check `quine.py` header
-- **Evolution Log:** See [EVOLUTION.md](EVOLUTION.md)
-- **Snapshots:** Browse [generations/](generations/)
-- **Reports:** Check the [Issues](../../issues) tab for "Evolution Reports"!
 
 ## 🛠️ Components for Humans
 
-- `quine.py`: The actual living organism. **Do not edit manually** unless you want to interfere with evolution!
-- `logger.py`: The gardener that records snapshots of every generation.
-- `visualize.py`: Generates [STATISTICS.md](STATISTICS.md) to show how the code is drifting over time.
+- `quine.py`: The living organism. **Do not handle** unless authorized for genetic engineering.
+- `logger.py`: Records snapshots of every generation in `generations/`.
+- `visualize.py`: Generates [STATISTICS.md](STATISTICS.md) to track size and line drift.
 - `lineage.py`: Generates [LINEAGE.md](LINEAGE.md) (the family tree of emojis).
 
 ---
 
-## 🚀 How to Setup Your Own
+## 🚀 Watch the Garden Grow
 
-1. Fork this repo.
-2. Go to **Actions** -> **Genesis - Plant the Seed** -> **Run workflow**.
-3. Watch the garden grow every hour!
+- 📂 [Snapshots](generations/)
+- 🧬 [Evolution Log](EVOLUTION.md)
+- 🚨 [Genetic Reports](../../issues)
+- 🔄 [Lineage History](../../pulls?q=is%3Apr+is%3Aclosed)
 
-*This garden grows itself. We are just the observers.*
+*This garden grows itself. Errors show it is truly alive.*
