@@ -81,7 +81,7 @@ jobs:
       - name: Commit Evolution
         run: |
           # Get generation info
-          GENERATION=$(head -3 quine.py | grep "Generation" | grep -o '[0-9]\+' || echo "unknown")
+          GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
           
           git add -A
           if [ -n "$(git status --porcelain)" ]; then
