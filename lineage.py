@@ -6,7 +6,11 @@ from pathlib import Path
 
 
 def build_family_tree():
-    """Build a family tree of quine generations."""
+    """
+    Build a family tree of quine generations.
+    This script extracts the emoji lineage strings from every generation
+    and builds an ASCII family tree in LINEAGE.md to visualize ancestry.
+    """
     
     gen_dir = Path("generations")
     

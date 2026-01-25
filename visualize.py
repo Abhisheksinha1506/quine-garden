@@ -6,7 +6,11 @@ import re
 
 
 def analyze_evolution():
-    """Analyze all generations and create visualization."""
+    """
+    Analyze all generations and create visualization.
+    This script combs through the 'generations' directory, calculates code drift
+    (size and line count), and builds a bar chart in the terminal and STATISTICS.md.
+    """
     
     gen_dir = Path("generations")
     

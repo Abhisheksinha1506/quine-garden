@@ -7,7 +7,11 @@ from pathlib import Path
 
 
 def log_generation():
-    """Log current quine generation to history."""
+    """
+    Log current quine generation to history.
+    This function reads the living quine, extracts its generation number,
+    saves a snapshot for posterity, and updates the evolution log.
+    """
     
     # Read current quine
     with open("quine.py", "r") as f:
