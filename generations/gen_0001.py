@@ -31,7 +31,7 @@ MUTATIONS = %r
 template = %r
 
 # Temporal DNA
-date_str = datetime.now().strftime("%%Y-%%m-%%d")
+date_str = datetime.now().strftime("%%Y-%%m-%%d %%H:%%M")
 date_hash = hashlib.sha256(date_str.encode()).hexdigest()
 mutation_index = int(date_hash[-2:], 16) %% len(MUTATIONS)
 
@@ -55,7 +55,7 @@ print(template %% (generation, lineage, MUTATIONS, template, generation, lineage
 '''
 
 # Temporal DNA
-date_str = datetime.now().strftime("%Y-%m-%d")
+date_str = datetime.now().strftime("%Y-%m-%d %H:%M")
 date_hash = hashlib.sha256(date_str.encode()).hexdigest()
 mutation_index = int(date_hash[-2:], 16) % len(MUTATIONS)
 
