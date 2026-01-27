@@ -2,7 +2,7 @@ name: Daily Evolution
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Every hour (more reliable than 15 mins)
+    - cron: '30 * * * *'  # Every hour (IST offset)
   
   workflow_dispatch:  # Manual trigger for testing
 
