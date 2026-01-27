@@ -351,3 +351,43 @@ Lineage: 🌷🌷🍀🌺🌼🌷🎍
 ```
 
 ---
+
+## Generation 7
+
+- **Date:** 2026-01-27 10:26:29 UTC
+- **File:** `generations/gen_0007.py`
+- **Technical Status:** `# Drift: Stable replication`
+- **Nature's Note:** *The garden is blooming exactly as expected, peaceful and calm.*
+- **Stats:** 44 lines, 3130 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 7
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺🌼🌷🎍
+# Drift: Stable replication
+# Nature's Note: The garden is bloomin...
+```
+
+---
+
+## Generation 8
+
+- **Date:** 2026-01-27 10:26:29 UTC
+- **File:** `generations/gen_0008.py`
+- **Technical Status:** `# Drift: Environmental pressure`
+- **Nature's Note:** *The garden is feeling the heat, adapting to survive.*
+- **Stats:** 44 lines, 3126 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 8
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺🌼🌷🎍🎋
+# Drift: Environmental pressure
+# Nature's Note: The garden is fe...
+```
+
+---
