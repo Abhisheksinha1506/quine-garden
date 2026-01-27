@@ -231,3 +231,43 @@ Lineage: 🌷🌷🍀🌺
 ```
 
 ---
+
+## Generation 4
+
+- **Date:** 2026-01-27 07:49:38 UTC
+- **File:** `generations/gen_0004.py`
+- **Technical Status:** `# Drift: Mutation success`
+- **Nature's Note:** *A rare flower has bloomed! The garden is stronger than yesterday.*
+- **Stats:** 44 lines, 3125 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 4
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺
+# Drift: Mutation success
+# Nature's Note: A rare flower has bloomed!...
+```
+
+---
+
+## Generation 5
+
+- **Date:** 2026-01-27 07:49:38 UTC
+- **File:** `generations/gen_0005.py`
+- **Technical Status:** `# Drift: Mutation success`
+- **Nature's Note:** *A rare flower has bloomed! The garden is stronger than yesterday.*
+- **Stats:** 44 lines, 3127 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 5
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺🌼
+# Drift: Mutation success
+# Nature's Note: A rare flower has bloomed...
+```
+
+---
