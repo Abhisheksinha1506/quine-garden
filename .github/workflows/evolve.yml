@@ -78,54 +78,29 @@ jobs:
             exit 1
           fi
       
-      - name: Propose Mutation (PR)
+      - name: Commit and Push Evolution
         if: success()
-        id: pr_step
+        id: commit_step
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           GENERATION=$(grep "Generation" quine.py | head -n 1 | grep -o '[0-9]\+' || echo "unknown")
-          DRIFT=$(grep "# Drift:" quine.py | head -n 1 || echo "No drift recorded")
           BRANCH_NAME="${{ steps.evolve_step.outputs.branch_name }}"
           
+          # Commit changes to the evolution branch first
           git add -A
-          git commit -m "🧬 Evolution: Generation ${GENERATION}"
-          git push origin "$BRANCH_NAME"
+          git commit -m "🧬 Evolution: Generation ${GENERATION} [skip ci]"
           
-          # Attempt to create PR
-          echo "Attempting to create PR..."
-          if PR_URL=$(gh pr create --title "🧬 Mutation Proposal: Generation ${GENERATION}" \
-            --body "## Genetic Drift Detected
-            
-            - **Generation:** ${GENERATION}
-            - **Observations:** ${DRIFT}
-            
-            *The garden is proposing this change to its own genome.*" \
-            --base main --head "$BRANCH_NAME" 2>&1); then
-            echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
-            echo "✅ PR created: $PR_URL"
-          else
-            echo "⚠️ PR creation failed: $PR_URL"
-            echo "This is likely a permission issue. Falling back to direct commit if possible..."
-            echo "pr_failed=true" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Auto-Merge Mutation
-        if: success() && steps.pr_step.outputs.pr_failed != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_URL="${{ steps.pr_step.outputs.pr_url }}"
-          gh pr merge "$PR_URL" --merge --delete-branch
-      
-      - name: Fallback Direct Commit
-        if: success() && steps.pr_step.outputs.pr_failed == 'true'
-        run: |
-          echo "Infrastructure (PR) failed, but quine is healthy. Merging directly to main..."
+          # Switch to main and merge
           git checkout main
           git pull origin main
-          git merge "${{ steps.evolve_step.outputs.branch_name }}"
+          git merge "$BRANCH_NAME"
           git push origin main
+          
+          # Cleanup
+          git branch -d "$BRANCH_NAME"
+          
+          echo "✅ Evolution merged directly to main"
       
       - name: Report Genetic Collapse (Issue)
         if: failure() && steps.verify_step.outcome == 'failure'
