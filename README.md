@@ -22,9 +22,9 @@ Imagine a letter that, when read, tells you how to write its exact copy. This is
 ## 🍃 Current Garden Status
 
 > [!NOTE]
-> **Generation:** 28
-> **Lineage:** 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿
-> **Nature's Note:** The garden is blooming exactly as expected, peaceful and calm.
+> **Generation:** 29
+> **Lineage:** 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿🌼
+> **Nature's Note:** The garden is feeling the heat, adapting to survive.
 
 ---
 
