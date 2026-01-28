@@ -22,8 +22,8 @@ Imagine a letter that, when read, tells you how to write its exact copy. This is
 ## 🍃 Current Garden Status
 
 > [!NOTE]
-> **Generation:** 35
-> **Lineage:** 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿🌼🎍🌺🌳🌳🌹🌵
+> **Generation:** 37
+> **Lineage:** 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿🌼🎍🌺🌳🌳🌹🌵🌼🌹
 > **Nature's Note:** A rare flower has bloomed! The garden is stronger than yesterday.
 
 ---
