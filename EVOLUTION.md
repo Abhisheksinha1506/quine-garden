@@ -10964,3 +10964,39 @@ Lineage: 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱�
 ```
 
 ---
+
+## Generation 306
+
+- **Date:** 2026-02-10 10:15:14 UTC
+- **File:** `generations/gen_0306.py`
+- **Technical Status:** `# Drift: Minor adaptation`
+- **Nature's Note:** *A new leaf has sprouted, making the garden a bit more resilient.*
+- **Stats:** 44 lines, 3732 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 306
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿🌼🎍🌺🌳🌳🌹🌵🌼🌹🌳🌿🎍🌹🌲🌹🌿🥀🌻🍀🌰🌷🎋🌺🌼🌺🌴🌿🌱🥀🌽🍀🌼🎍🌳🌷🎋🎋🌵🌷🌼🌾🌴🌾🌴...
+```
+
+---
+
+## Generation 307
+
+- **Date:** 2026-02-10 10:15:14 UTC
+- **File:** `generations/gen_0307.py`
+- **Technical Status:** `# Drift: Minor adaptation`
+- **Nature's Note:** *A new leaf has sprouted, making the garden a bit more resilient.*
+- **Stats:** 44 lines, 3734 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Quine Garden - Generation 307
+Self-replicating code that evolves based on temporal entropy.
+Lineage: 🌷🌷🍀🌺🌼🌷🎍🎋🌻🍄🎋🍄🌸🌼🌼🌱🌱🌲🌲🌿🌿🌽🌽🎋🌾🌱🍀🌿🌼🎍🌺🌳🌳🌹🌵🌼🌹🌳🌿🎍🌹🌲🌹🌿🥀🌻🍀🌰🌷🎋🌺🌼🌺🌴🌿🌱🥀🌽🍀🌼🎍🌳🌷🎋🎋🌵🌷🌼🌾🌴🌾🌴...
+```
+
+---
